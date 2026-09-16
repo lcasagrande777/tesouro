@@ -2,9 +2,16 @@
 """
 Coleta diária dos rendimentos dos títulos do Tesouro Direto.
 
-Busca o JSON público que o próprio site do Tesouro Direto usa para montar a
-página "Rendimento dos Títulos" e acrescenta um novo retrato (snapshot) do
-dia ao histórico acumulado em data/historico.json (e data/historico.csv).
+Fonte dos dados: o dataset público "Taxas dos Títulos Ofertados pelo Tesouro
+Direto", publicado em CSV pelo Tesouro Transparente (portal oficial de dados
+abertos do Tesouro Nacional). É o mesmo dado que o site tesourodireto.com.br
+usa, mas por um canal de dados abertos mais estável do que o endpoint interno
+do site (que foi descontinuado).
+
+O CSV traz o histórico completo (todas as datas já publicadas); este script
+filtra apenas o dia mais recente disponível nele e acrescenta esse retrato
+(snapshot) ao histórico acumulado em data/historico.json (e
+data/historico.csv).
 
 Uso:
     python scripts/coletar.py
@@ -13,6 +20,7 @@ Uso:
 from __future__ import annotations
 
 import csv
+import io
 import json
 import sys
 import time
@@ -22,9 +30,10 @@ from zoneinfo import ZoneInfo
 
 import requests
 
-URL_API = (
-    "https://www.tesourodireto.com.br/json/br/com/b3/tesourodireto/"
-    "service/api/treasurybondsinfo.json"
+URL_CSV = (
+    "https://www.tesourotransparente.gov.br/ckan/dataset/"
+    "df56aa42-484a-4a59-8184-7676580c81e3/resource/"
+    "796d2059-14e9-44e3-80c9-2d9e30b405c1/download/PrecoTaxaTesouroDireto.csv"
 )
 FUSO_BR = ZoneInfo("America/Sao_Paulo")
 
@@ -32,64 +41,108 @@ RAIZ = Path(__file__).resolve().parent.parent
 ARQ_JSON = RAIZ / "data" / "historico.json"
 ARQ_CSV = RAIZ / "data" / "historico.csv"
 
-# Um User-Agent de navegador real reduz a chance de o Cloudflare do site
-# bloquear a chamada por parecer tráfego de robô.
 CABECALHOS_HTTP = {
     "User-Agent": (
         "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
         "(KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
     ),
-    "Accept": "application/json, text/plain, */*",
-    "Accept-Language": "pt-BR,pt;q=0.9,en;q=0.8",
-    "Referer": (
-        "https://www.tesourodireto.com.br/produtos/dados-sobre-titulos/"
-        "rendimento-dos-titulos"
-    ),
+    "Accept": "text/csv,*/*",
 }
 
+# Indexador aproximado a partir do nome do tipo de título (o CSV não traz
+# essa coluna diretamente).
+_PISTAS_INDEXADOR = [
+    ("Selic", "SELIC"),
+    ("IPCA", "IPCA"),
+    ("IGPM", "IGP-M"),
+    ("Educa+", "IPCA"),
+    ("Renda+", "IPCA"),
+    ("Prefixado", "PREFIXADO"),
+]
 
-def buscar_dados(tentativas: int = 4, espera_seg: float = 6.0) -> dict:
-    """Busca o JSON de rendimentos, tentando de novo em caso de bloqueio."""
+
+def _indexador_para(tipo_titulo: str) -> str | None:
+    for pista, nome in _PISTAS_INDEXADOR:
+        if pista.lower() in tipo_titulo.lower():
+            return nome
+    return None
+
+
+def _num_br(valor: str) -> float | None:
+    """Converte '14,23' (formato brasileiro) em 14.23; vazio vira None."""
+    valor = (valor or "").strip()
+    if not valor:
+        return None
+    return float(valor.replace(".", "").replace(",", "."))
+
+
+def _data_br_para_iso(data_br: str) -> str | None:
+    """Converte 'dd/mm/aaaa' em 'aaaa-mm-dd'."""
+    data_br = (data_br or "").strip()
+    if not data_br:
+        return None
+    dia, mes, ano = data_br.split("/")
+    return f"{ano}-{mes}-{dia}"
+
+
+def buscar_csv(tentativas: int = 4, espera_seg: float = 6.0) -> str:
+    """Baixa o CSV completo do Tesouro Transparente, com novas tentativas."""
     ultimo_erro: Exception | None = None
     for tentativa in range(1, tentativas + 1):
         try:
-            resp = requests.get(URL_API, headers=CABECALHOS_HTTP, timeout=20)
+            resp = requests.get(URL_CSV, headers=CABECALHOS_HTTP, timeout=60)
             resp.raise_for_status()
-            return resp.json()
+            resp.encoding = resp.encoding or "utf-8"
+            return resp.text
         except Exception as erro:  # noqa: BLE001 - queremos tentar de novo
             ultimo_erro = erro
             print(f"[tentativa {tentativa}/{tentativas}] falhou: {erro}")
             if tentativa < tentativas:
                 time.sleep(espera_seg)
     raise RuntimeError(
-        "Não foi possível obter os dados do Tesouro Direto após várias "
-        f"tentativas (último erro: {ultimo_erro}). O site costuma bloquear "
-        "chamadas automatizadas esporadicamente (proteção Cloudflare); "
-        "tente novamente mais tarde ou rode o workflow manualmente."
+        "Não foi possível baixar o CSV do Tesouro Transparente após várias "
+        f"tentativas (último erro: {ultimo_erro}). Tente novamente mais "
+        "tarde ou rode o workflow manualmente."
     )
 
 
-def extrair_titulos(dados: dict) -> list[dict]:
-    """Converte o JSON bruto da API numa lista simples de títulos/rendimentos."""
-    lista_bruta = dados.get("response", {}).get("TrsrBdTradgList", [])
-    titulos = []
-    for item in lista_bruta:
-        bd = item.get("TrsrBd", {})
-        indexador = (bd.get("FinIndxs") or {}).get("nm")
-        titulos.append(
-            {
-                "nome": bd.get("nm"),
-                "isin": bd.get("isinCd"),
-                "indexador": indexador,
-                "vencimento": (bd.get("mtrtyDt") or "")[:10] or None,
-                "taxaCompra": bd.get("anulInvstmtRate"),
-                "taxaVenda": bd.get("anulRedRate"),
-                "puCompra": bd.get("untrInvstmtVal"),
-                "puVenda": bd.get("untrRedVal"),
-                "investimentoMinimo": bd.get("minInvstmtAmt"),
-            }
-        )
-    return [t for t in titulos if t["nome"]]
+def extrair_titulos_do_dia_mais_recente(texto_csv: str) -> tuple[str, list[dict]]:
+    """Lê o CSV completo e devolve (data_iso_mais_recente, títulos daquele dia)."""
+    leitor = csv.DictReader(io.StringIO(texto_csv), delimiter=";")
+
+    linhas_por_data: dict[str, list[dict]] = {}
+    for linha in leitor:
+        data_iso = _data_br_para_iso(linha.get("Data Base", ""))
+        tipo_titulo = (linha.get("Tipo Titulo") or "").strip()
+        vencimento_iso = _data_br_para_iso(linha.get("Data Vencimento", ""))
+        if not data_iso or not tipo_titulo or not vencimento_iso:
+            continue
+
+        ano_vencimento = vencimento_iso[:4]
+        titulo = {
+            "nome": f"{tipo_titulo} {ano_vencimento}",
+            "isin": None,
+            "indexador": _indexador_para(tipo_titulo),
+            "vencimento": vencimento_iso,
+            "taxaCompra": _valor_ou_none(_num_br(linha.get("Taxa Compra Manha", "")), escala=0.01),
+            "taxaVenda": _valor_ou_none(_num_br(linha.get("Taxa Venda Manha", "")), escala=0.01),
+            "puCompra": _num_br(linha.get("PU Compra Manha", "")),
+            "puVenda": _num_br(linha.get("PU Venda Manha", "")),
+            "investimentoMinimo": None,
+        }
+        linhas_por_data.setdefault(data_iso, []).append(titulo)
+
+    if not linhas_por_data:
+        raise RuntimeError("O CSV foi baixado, mas nenhuma linha válida foi encontrada.")
+
+    data_mais_recente = max(linhas_por_data.keys())
+    return data_mais_recente, linhas_por_data[data_mais_recente]
+
+
+def _valor_ou_none(valor: float | None, escala: float) -> float | None:
+    if valor is None:
+        return None
+    return valor * escala
 
 
 def carregar_historico(caminho: Path) -> list[dict]:
@@ -138,13 +191,11 @@ def salvar_csv(caminho: Path, historico: list[dict]) -> None:
 
 def main() -> None:
     agora = datetime.now(FUSO_BR)
-    dados = buscar_dados()
-    titulos = extrair_titulos(dados)
-    if not titulos:
-        raise RuntimeError("A API respondeu, mas nenhum título foi encontrado no JSON.")
+    texto_csv = buscar_csv()
+    data_referencia, titulos = extrair_titulos_do_dia_mais_recente(texto_csv)
 
     snapshot = {
-        "data": agora.strftime("%Y-%m-%d"),
+        "data": data_referencia,
         "coletadoEm": agora.isoformat(timespec="seconds"),
         "titulos": titulos,
     }

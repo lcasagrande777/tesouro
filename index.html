@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Boletim do Tesouro Direto</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3.0.0/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+<style>
+  :root{
+    --ink: #16241f;
+    --ink-soft: #3d4a44;
+    --paper: #edeee6;
+    --surface: #e2e2d4;
+    --line: #c7c6b4;
+    --gold: #a6742c;
+    --petrol: #1f5c6b;
+    --danger: #8a3324;
+  }
+  *{ box-sizing: border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'IBM Plex Sans', system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  .num{ font-variant-numeric: tabular-nums; }
+
+  .wrap{ max-width: 980px; margin: 0 auto; padding: 28px 20px 80px; }
+
+  header.masthead{
+    border-bottom: 3px double var(--ink);
+    padding-bottom: 18px;
+    margin-bottom: 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  header.masthead h1{
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-weight: 700;
+    font-size: clamp(1.7rem, 4vw, 2.5rem);
+    margin: 0 0 4px;
+    letter-spacing: -0.01em;
+  }
+  header.masthead p{
+    margin: 0;
+    color: var(--ink-soft);
+    font-size: 0.95rem;
+    max-width: 46ch;
+  }
+  .status{
+    display:flex; flex-direction:column; align-items:flex-end; gap:6px;
+    font-size: 0.85rem; color: var(--ink-soft);
+    text-align: right;
+  }
+  .status .pill{
+    display:inline-flex; align-items:center; gap:6px;
+    border: 1px solid var(--line);
+    padding: 4px 10px; border-radius: 999px;
+    font-size: 0.8rem;
+    background: var(--surface);
+  }
+  .status .pill .dot{ width:7px; height:7px; border-radius:50%; background: var(--ink-soft); }
+  .status .pill.aberto .dot{ background: var(--petrol); }
+  .status .pill.fechado .dot{ background: var(--danger); }
+
+  section{ margin-bottom: 34px; }
+
+  .controls{
+    display:flex; align-items:center; justify-content: space-between;
+    gap: 16px; flex-wrap: wrap;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 14px; margin-bottom: 18px;
+  }
+  .controls label{ font-size: 0.8rem; color: var(--ink-soft); display:block; margin-bottom: 4px; }
+  select, input[type="search"]{
+    font-family: inherit; font-size: 0.95rem; color: var(--ink);
+    background: var(--paper);
+    border: 1px solid var(--ink-soft);
+    padding: 8px 10px; border-radius: 3px;
+    min-width: 230px;
+  }
+  .legenda-cores{ display:flex; gap:18px; font-size:0.85rem; color: var(--ink-soft); }
+  .legenda-cores span{ display:inline-flex; align-items:center; gap:6px; }
+  .legenda-cores i{ width:14px; height:3px; display:inline-block; border-radius:2px; }
+
+  .chart-box{
+    border: 1px solid var(--line);
+    background: #fff;
+    padding: 18px 14px 10px;
+    height: 320px;
+    position: relative;
+  }
+
+  h2{
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-weight: 600; font-size: 1.2rem; margin: 0 0 4px;
+  }
+  .section-note{ color: var(--ink-soft); font-size: 0.85rem; margin: 0 0 14px; }
+
+  table{ width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+  thead th{
+    text-align: left; font-weight: 600; color: var(--ink-soft);
+    border-bottom: 1px solid var(--ink);
+    padding: 8px 10px; white-space: nowrap;
+  }
+  tbody td{
+    padding: 7px 10px; border-bottom: 1px solid var(--line);
+    white-space: nowrap;
+  }
+  tbody tr:nth-child(4n+1), tbody tr:nth-child(4n+2){ background: var(--surface); }
+  td.num, th.num{ text-align: right; }
+
+  .empty{
+    border: 1px dashed var(--ink-soft);
+    padding: 28px 22px;
+    color: var(--ink-soft);
+    background: var(--surface);
+  }
+  .empty strong{ color: var(--ink); }
+
+  a.csv-link{
+    color: var(--petrol); text-decoration: none; border-bottom: 1px solid var(--petrol);
+    font-size: 0.85rem;
+  }
+  a.csv-link:hover{ opacity: 0.75; }
+
+  footer{
+    border-top: 1px solid var(--line);
+    margin-top: 40px; padding-top: 14px;
+    font-size: 0.78rem; color: var(--ink-soft);
+  }
+  footer a{ color: var(--ink-soft); }
+
+  @media (max-width: 640px){
+    .status{ align-items: flex-start; text-align: left; }
+    header.masthead{ flex-direction: column; align-items: flex-start; }
+    table{ font-size: 0.78rem; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="masthead">
+    <div>
+      <h1>Boletim do Tesouro Direto</h1>
+      <p>Rendimentos dos títulos, coletados automaticamente todo dia ao meio-dia e acumulados numa série temporal.</p>
+    </div>
+    <div class="status">
+      <span class="pill" id="pill-coleta"><span class="dot"></span><span id="texto-coleta">carregando…</span></span>
+      <span id="texto-dias">—</span>
+    </div>
+  </header>
+
+  <section id="secao-grafico">
+    <h2 id="titulo-grafico">Evolução da taxa</h2>
+    <p class="section-note">Taxa anual de compra (o que você trava ao investir hoje) e de venda (usada se resgatar antes do vencimento).</p>
+
+    <div class="controls">
+      <div>
+        <label for="seletor-titulo">Título</label>
+        <select id="seletor-titulo"></select>
+      </div>
+      <div class="legenda-cores">
+        <span><i style="background:var(--gold)"></i> Taxa de compra</span>
+        <span><i style="background:var(--petrol)"></i> Taxa de venda</span>
+      </div>
+    </div>
+
+    <div class="chart-box"><canvas id="grafico"></canvas></div>
+  </section>
+
+  <section id="secao-tabela">
+    <h2>Histórico completo</h2>
+    <p class="section-note">
+      Todas as coletas já realizadas. <a class="csv-link" href="./data/historico.csv" download>Baixar tudo em CSV ↓</a>
+    </p>
+    <div class="controls" style="border-bottom:none; padding-bottom:0;">
+      <div>
+        <label for="busca-tabela">Buscar título</label>
+        <input type="search" id="busca-tabela" placeholder="ex.: Selic, IPCA, Prefixado…">
+      </div>
+    </div>
+    <div style="overflow-x:auto;">
+      <table>
+        <thead>
+          <tr>
+            <th>Data</th>
+            <th>Título</th>
+            <th>Indexador</th>
+            <th>Vencimento</th>
+            <th class="num">Taxa compra</th>
+            <th class="num">Taxa venda</th>
+            <th class="num">PU compra</th>
+            <th class="num">PU venda</th>
+          </tr>
+        </thead>
+        <tbody id="corpo-tabela"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <div class="empty" id="estado-vazio" style="display:none;">
+    <strong>Nenhuma coleta encontrada ainda.</strong><br><br>
+    Isso é esperado no primeiro acesso: a série só começa a partir do dia em que o workflow rodar pela primeira vez
+    (ele não busca dados retroativos, porque o site do Tesouro só expõe os valores do dia atual).<br><br>
+    Para ver dados agora, vá até a aba <strong>Actions</strong> do repositório no GitHub e rode manualmente o workflow
+    <em>"Coleta diaria - Tesouro Direto"</em> (botão <em>Run workflow</em>). A partir daí, ele roda sozinho todo dia ao meio-dia.
+  </div>
+
+  <footer>
+    Dados replicados do serviço público usado por
+    <a href="https://www.tesourodireto.com.br/produtos/dados-sobre-titulos/rendimento-dos-titulos" target="_blank" rel="noopener">tesourodireto.com.br</a>.
+    Uso pessoal e informativo — não é recomendação de investimento; confira sempre a fonte oficial antes de decidir.
+  </footer>
+
+</div>
+
+<script>
+const CORES = { compra: '#a6742c', venda: '#1f5c6b' };
+
+function formatarDataBR(iso){
+  if(!iso) return '—';
+  const [ano, mes, dia] = iso.split('-');
+  return `${dia}/${mes}/${ano}`;
+}
+function formatarPercentual(v){
+  if(v === null || v === undefined) return '—';
+  return (v*100).toFixed(2).replace('.', ',') + '%';
+}
+function formatarMoeda(v){
+  if(v === null || v === undefined) return '—';
+  return v.toLocaleString('pt-BR', {style:'currency', currency:'BRL'});
+}
+
+async function carregar(){
+  let historico = [];
+  try{
+    const resp = await fetch('./data/historico.json', {cache:'no-store'});
+    if(resp.ok) historico = await resp.json();
+  }catch(e){
+    console.error('Falha ao carregar historico.json', e);
+  }
+
+  if(!Array.isArray(historico) || historico.length === 0){
+    document.getElementById('secao-grafico').style.display = 'none';
+    document.getElementById('secao-tabela').style.display = 'none';
+    document.getElementById('estado-vazio').style.display = 'block';
+    document.getElementById('texto-coleta').textContent = 'sem coletas ainda';
+    return;
+  }
+
+  historico.sort((a,b) => a.data.localeCompare(b.data));
+  const ultimo = historico[historico.length - 1];
+
+  document.getElementById('texto-coleta').textContent = `última coleta: ${formatarDataBR(ultimo.data)}`;
+  document.getElementById('texto-dias').textContent = `${historico.length} dia(s) de histórico acumulado`;
+
+  // lista de títulos disponíveis, com base na coleta mais recente
+  const nomes = [...new Set(ultimo.titulos.map(t => t.nome))].sort();
+  const seletor = document.getElementById('seletor-titulo');
+  seletor.innerHTML = nomes.map(n => `<option value="${n}">${n}</option>`).join('');
+
+  let grafico = null;
+  function desenharGrafico(nomeEscolhido){
+    document.getElementById('titulo-grafico').textContent = `Evolução da taxa — ${nomeEscolhido}`;
+    const pontosCompra = [], pontosVenda = [];
+    for(const snap of historico){
+      const t = snap.titulos.find(x => x.nome === nomeEscolhido);
+      if(!t) continue;
+      if(t.taxaCompra !== null && t.taxaCompra !== undefined) pontosCompra.push({x: snap.data, y: +(t.taxaCompra*100).toFixed(4)});
+      if(t.taxaVenda !== null && t.taxaVenda !== undefined) pontosVenda.push({x: snap.data, y: +(t.taxaVenda*100).toFixed(4)});
+    }
+    if(grafico) grafico.destroy();
+    grafico = new Chart(document.getElementById('grafico'), {
+      type: 'line',
+      data: {
+        datasets: [
+          { label: 'Taxa de compra (% a.a.)', data: pontosCompra, borderColor: CORES.compra, backgroundColor: CORES.compra, tension: 0.15, pointRadius: 3 },
+          { label: 'Taxa de venda (% a.a.)', data: pontosVenda, borderColor: CORES.venda, backgroundColor: CORES.venda, tension: 0.15, pointRadius: 3 },
+        ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: {
+          x: { type: 'time', time: { unit: 'day', tooltipFormat: 'dd/MM/yyyy' }, grid: { display:false } },
+          y: { ticks: { callback: v => v.toFixed(1) + '%' }, grid: { color: '#e2e2d4' } }
+        }
+      }
+    });
+  }
+  desenharGrafico(nomes[0]);
+  seletor.addEventListener('change', e => desenharGrafico(e.target.value));
+
+  // tabela completa, mais recente primeiro
+  const linhas = [];
+  for(const snap of [...historico].reverse()){
+    for(const t of [...snap.titulos].sort((a,b) => a.nome.localeCompare(b.nome))){
+      linhas.push({ data: snap.data, ...t });
+    }
+  }
+  const corpo = document.getElementById('corpo-tabela');
+  function desenharTabela(filtro){
+    const f = filtro.trim().toLowerCase();
+    const filtradas = f ? linhas.filter(l => l.nome.toLowerCase().includes(f)) : linhas;
+    corpo.innerHTML = filtradas.map(l => `
+      <tr>
+        <td>${formatarDataBR(l.data)}</td>
+        <td>${l.nome}</td>
+        <td>${l.indexador ?? '—'}</td>
+        <td>${formatarDataBR(l.vencimento)}</td>
+        <td class="num">${formatarPercentual(l.taxaCompra)}</td>
+        <td class="num">${formatarPercentual(l.taxaVenda)}</td>
+        <td class="num">${formatarMoeda(l.puCompra)}</td>
+        <td class="num">${formatarMoeda(l.puVenda)}</td>
+      </tr>`).join('');
+  }
+  desenharTabela('');
+  document.getElementById('busca-tabela').addEventListener('input', e => desenharTabela(e.target.value));
+}
+
+carregar();
+</script>
+</body>
+</html>

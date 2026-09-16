@@ -1,0 +1,42 @@
+yaml
+name: Coleta diaria - Tesouro Direto
+
+on:
+  schedule:
+    # 15:00 UTC = 12:00 em Brasilia (o Brasil nao tem mais horario de verao,
+    # entao o fuso fica fixo em UTC-3 o ano todo).
+    - cron: "0 15 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  coletar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Baixar o repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Instalar dependencias
+        run: pip install -r requirements.txt
+
+      - name: Rodar coleta
+        run: python scripts/coletar.py
+
+      - name: Salvar dados coletados no repositorio
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/historico.json data/historico.csv
+          if git diff --cached --quiet; then
+            echo "Nada novo para salvar hoje."
+          else
+            git commit -m "Coleta automatica: $(date -u +'%Y-%m-%d %H:%M UTC')"
+            git push
+          fi

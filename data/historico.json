@@ -10305,17 +10305,17 @@
   },
   {
     "data": "2026-10-09",
-    "coletadoEm": "2026-10-10T16:05:41-03:00",
+    "coletadoEm": "2026-10-11T16:18:10-03:00",
     "titulos": [
       {
-        "nome": "Tesouro Selic 2029",
+        "nome": "Tesouro Selic 2027",
         "isin": null,
         "indexador": "SELIC",
-        "vencimento": "2029-03-01",
-        "taxaCompra": 0.0005,
-        "taxaVenda": 0.0006,
-        "puCompra": 20046.46,
-        "puVenda": 20031.46,
+        "vencimento": "2027-03-01",
+        "taxaCompra": 0.0001,
+        "taxaVenda": 0.0002,
+        "puCompra": 20067.61,
+        "puVenda": 20056.61,
         "investimentoMinimo": null
       },
       {
@@ -10330,17 +10330,6 @@
         "investimentoMinimo": null
       },
       {
-        "nome": "Tesouro Selic 2027",
-        "isin": null,
-        "indexador": "SELIC",
-        "vencimento": "2027-03-01",
-        "taxaCompra": 0.0001,
-        "taxaVenda": 0.0002,
-        "puCompra": 20067.61,
-        "puVenda": 20056.61,
-        "investimentoMinimo": null
-      },
-      {
         "nome": "Tesouro Selic 2028",
         "isin": null,
         "indexador": "SELIC",
@@ -10349,6 +10338,17 @@
         "taxaVenda": 0.0004,
         "puCompra": 20061.21,
         "puVenda": 20048.17,
+        "investimentoMinimo": null
+      },
+      {
+        "nome": "Tesouro Selic 2029",
+        "isin": null,
+        "indexador": "SELIC",
+        "vencimento": "2029-03-01",
+        "taxaCompra": 0.0005,
+        "taxaVenda": 0.0006,
+        "puCompra": 20046.46,
+        "puVenda": 20031.46,
         "investimentoMinimo": null
       },
       {
@@ -10374,14 +10374,14 @@
         "investimentoMinimo": null
       },
       {
-        "nome": "Tesouro Prefixado 2029",
+        "nome": "Tesouro Prefixado 2027",
         "isin": null,
         "indexador": "PREFIXADO",
-        "vencimento": "2029-01-01",
-        "taxaCompra": 0.12300000000000001,
-        "taxaVenda": 0.1242,
-        "puCompra": 774.89,
-        "puVenda": 772.72,
+        "vencimento": "2027-01-01",
+        "taxaCompra": 0.1328,
+        "taxaVenda": 0.134,
+        "puCompra": 973.15,
+        "puVenda": 972.44,
         "investimentoMinimo": null
       },
       {
@@ -10396,58 +10396,25 @@
         "investimentoMinimo": null
       },
       {
-        "nome": "Tesouro Prefixado 2027",
+        "nome": "Tesouro Prefixado 2029",
         "isin": null,
         "indexador": "PREFIXADO",
-        "vencimento": "2027-01-01",
-        "taxaCompra": 0.1328,
-        "taxaVenda": 0.134,
-        "puCompra": 973.15,
-        "puVenda": 972.44,
+        "vencimento": "2029-01-01",
+        "taxaCompra": 0.12300000000000001,
+        "taxaVenda": 0.1242,
+        "puCompra": 774.89,
+        "puVenda": 772.72,
         "investimentoMinimo": null
       },
       {
-        "nome": "Tesouro IPCA+ com Juros Semestrais 2050",
+        "nome": "Tesouro IPCA+ com Juros Semestrais 2037",
         "isin": null,
         "indexador": "IPCA",
-        "vencimento": "2050-08-15",
-        "taxaCompra": 0.0652,
-        "taxaVenda": 0.0664,
-        "puCompra": 4539.3,
-        "puVenda": 4469.79,
-        "investimentoMinimo": null
-      },
-      {
-        "nome": "Tesouro IPCA+ com Juros Semestrais 2040",
-        "isin": null,
-        "indexador": "IPCA",
-        "vencimento": "2040-08-15",
-        "taxaCompra": 0.0655,
-        "taxaVenda": 0.0667,
-        "puCompra": 4594.09,
-        "puVenda": 4539.78,
-        "investimentoMinimo": null
-      },
-      {
-        "nome": "Tesouro IPCA+ com Juros Semestrais 2060",
-        "isin": null,
-        "indexador": "IPCA",
-        "vencimento": "2060-08-15",
-        "taxaCompra": 0.0647,
-        "taxaVenda": 0.0659,
-        "puCompra": 4532.97,
-        "puVenda": 4455.11,
-        "investimentoMinimo": null
-      },
-      {
-        "nome": "Tesouro IPCA+ com Juros Semestrais 2045",
-        "isin": null,
-        "indexador": "IPCA",
-        "vencimento": "2045-05-15",
-        "taxaCompra": 0.0653,
-        "taxaVenda": 0.0665,
-        "puCompra": 4636.15,
-        "puVenda": 4573.25,
+        "vencimento": "2037-05-15",
+        "taxaCompra": 0.0666,
+        "taxaVenda": 0.0678,
+        "puCompra": 4664.96,
+        "puVenda": 4618.55,
         "investimentoMinimo": null
       },
       {
@@ -10473,14 +10440,14 @@
         "investimentoMinimo": null
       },
       {
-        "nome": "Tesouro IPCA+ com Juros Semestrais 2037",
+        "nome": "Tesouro IPCA+ com Juros Semestrais 2060",
         "isin": null,
         "indexador": "IPCA",
-        "vencimento": "2037-05-15",
-        "taxaCompra": 0.0666,
-        "taxaVenda": 0.0678,
-        "puCompra": 4664.96,
-        "puVenda": 4618.55,
+        "vencimento": "2060-08-15",
+        "taxaCompra": 0.0647,
+        "taxaVenda": 0.0659,
+        "puCompra": 4532.97,
+        "puVenda": 4455.11,
         "investimentoMinimo": null
       },
       {
@@ -10495,6 +10462,28 @@
         "investimentoMinimo": null
       },
       {
+        "nome": "Tesouro IPCA+ com Juros Semestrais 2050",
+        "isin": null,
+        "indexador": "IPCA",
+        "vencimento": "2050-08-15",
+        "taxaCompra": 0.0652,
+        "taxaVenda": 0.0664,
+        "puCompra": 4539.3,
+        "puVenda": 4469.79,
+        "investimentoMinimo": null
+      },
+      {
+        "nome": "Tesouro IPCA+ com Juros Semestrais 2040",
+        "isin": null,
+        "indexador": "IPCA",
+        "vencimento": "2040-08-15",
+        "taxaCompra": 0.0655,
+        "taxaVenda": 0.0667,
+        "puCompra": 4594.09,
+        "puVenda": 4539.78,
+        "investimentoMinimo": null
+      },
+      {
         "nome": "Tesouro IPCA+ com Juros Semestrais 2030",
         "isin": null,
         "indexador": "IPCA",
@@ -10503,6 +10492,61 @@
         "taxaVenda": 0.0678,
         "puCompra": 4715.57,
         "puVenda": 4691.11,
+        "investimentoMinimo": null
+      },
+      {
+        "nome": "Tesouro IPCA+ com Juros Semestrais 2045",
+        "isin": null,
+        "indexador": "IPCA",
+        "vencimento": "2045-05-15",
+        "taxaCompra": 0.0653,
+        "taxaVenda": 0.0665,
+        "puCompra": 4636.15,
+        "puVenda": 4573.25,
+        "investimentoMinimo": null
+      },
+      {
+        "nome": "Tesouro IPCA+ 2029",
+        "isin": null,
+        "indexador": "IPCA",
+        "vencimento": "2029-05-15",
+        "taxaCompra": 0.06620000000000001,
+        "taxaVenda": 0.0674,
+        "puCompra": 4042.91,
+        "puVenda": 4025.85,
+        "investimentoMinimo": null
+      },
+      {
+        "nome": "Tesouro IPCA+ 2040",
+        "isin": null,
+        "indexador": "IPCA",
+        "vencimento": "2040-08-15",
+        "taxaCompra": 0.0651,
+        "taxaVenda": 0.0663,
+        "puCompra": 1999.88,
+        "puVenda": 1966.48,
+        "investimentoMinimo": null
+      },
+      {
+        "nome": "Tesouro IPCA+ 2050",
+        "isin": null,
+        "indexador": "IPCA",
+        "vencimento": "2050-08-15",
+        "taxaCompra": 0.06480000000000001,
+        "taxaVenda": 0.066,
+        "puCompra": 1076.35,
+        "puVenda": 1046.6,
+        "investimentoMinimo": null
+      },
+      {
+        "nome": "Tesouro IPCA+ 2045",
+        "isin": null,
+        "indexador": "IPCA",
+        "vencimento": "2045-05-15",
+        "taxaCompra": 0.0649,
+        "taxaVenda": 0.0661,
+        "puCompra": 1491.05,
+        "puVenda": 1458.39,
         "investimentoMinimo": null
       },
       {
@@ -10528,50 +10572,6 @@
         "investimentoMinimo": null
       },
       {
-        "nome": "Tesouro IPCA+ 2050",
-        "isin": null,
-        "indexador": "IPCA",
-        "vencimento": "2050-08-15",
-        "taxaCompra": 0.06480000000000001,
-        "taxaVenda": 0.066,
-        "puCompra": 1076.35,
-        "puVenda": 1046.6,
-        "investimentoMinimo": null
-      },
-      {
-        "nome": "Tesouro IPCA+ 2040",
-        "isin": null,
-        "indexador": "IPCA",
-        "vencimento": "2040-08-15",
-        "taxaCompra": 0.0651,
-        "taxaVenda": 0.0663,
-        "puCompra": 1999.88,
-        "puVenda": 1966.48,
-        "investimentoMinimo": null
-      },
-      {
-        "nome": "Tesouro IPCA+ 2029",
-        "isin": null,
-        "indexador": "IPCA",
-        "vencimento": "2029-05-15",
-        "taxaCompra": 0.06620000000000001,
-        "taxaVenda": 0.0674,
-        "puCompra": 4042.91,
-        "puVenda": 4025.85,
-        "investimentoMinimo": null
-      },
-      {
-        "nome": "Tesouro IPCA+ 2045",
-        "isin": null,
-        "indexador": "IPCA",
-        "vencimento": "2045-05-15",
-        "taxaCompra": 0.0649,
-        "taxaVenda": 0.0661,
-        "puCompra": 1491.05,
-        "puVenda": 1458.39,
-        "investimentoMinimo": null
-      },
-      {
         "nome": "Tesouro IGPM+ com Juros Semestrais 2031",
         "isin": null,
         "indexador": "IGP-M",
@@ -10591,6 +10591,39 @@
         "taxaVenda": 0.1332,
         "puCompra": 1020.8,
         "puVenda": 1020.06,
+        "investimentoMinimo": null
+      },
+      {
+        "nome": "Tesouro Prefixado com Juros Semestrais 2037",
+        "isin": null,
+        "indexador": "PREFIXADO",
+        "vencimento": "2037-01-01",
+        "taxaCompra": 0.1257,
+        "taxaVenda": 0.12689999999999999,
+        "puCompra": 891.19,
+        "puVenda": 884.94,
+        "investimentoMinimo": null
+      },
+      {
+        "nome": "Tesouro Prefixado com Juros Semestrais 2029",
+        "isin": null,
+        "indexador": "PREFIXADO",
+        "vencimento": "2029-01-01",
+        "taxaCompra": 0.1213,
+        "taxaVenda": 0.1225,
+        "puCompra": 990.67,
+        "puVenda": 988.13,
+        "investimentoMinimo": null
+      },
+      {
+        "nome": "Tesouro Prefixado com Juros Semestrais 2031",
+        "isin": null,
+        "indexador": "PREFIXADO",
+        "vencimento": "2031-01-01",
+        "taxaCompra": 0.12480000000000001,
+        "taxaVenda": 0.126,
+        "puCompra": 954.24,
+        "puVenda": 950.34,
         "investimentoMinimo": null
       },
       {
@@ -10616,36 +10649,25 @@
         "investimentoMinimo": null
       },
       {
-        "nome": "Tesouro Prefixado com Juros Semestrais 2029",
+        "nome": "Tesouro Renda+ Aposentadoria Extra 2064",
         "isin": null,
-        "indexador": "PREFIXADO",
-        "vencimento": "2029-01-01",
-        "taxaCompra": 0.1213,
-        "taxaVenda": 0.1225,
-        "puCompra": 990.67,
-        "puVenda": 988.13,
+        "indexador": "IPCA",
+        "vencimento": "2064-12-15",
+        "taxaCompra": 0.0643,
+        "taxaVenda": 0.0655,
+        "puCompra": 884.1,
+        "puVenda": 857.4,
         "investimentoMinimo": null
       },
       {
-        "nome": "Tesouro Prefixado com Juros Semestrais 2037",
+        "nome": "Tesouro Renda+ Aposentadoria Extra 2054",
         "isin": null,
-        "indexador": "PREFIXADO",
-        "vencimento": "2037-01-01",
-        "taxaCompra": 0.1257,
-        "taxaVenda": 0.12689999999999999,
-        "puCompra": 891.19,
-        "puVenda": 884.94,
-        "investimentoMinimo": null
-      },
-      {
-        "nome": "Tesouro Prefixado com Juros Semestrais 2031",
-        "isin": null,
-        "indexador": "PREFIXADO",
-        "vencimento": "2031-01-01",
-        "taxaCompra": 0.12480000000000001,
-        "taxaVenda": 0.126,
-        "puCompra": 954.24,
-        "puVenda": 950.34,
+        "indexador": "IPCA",
+        "vencimento": "2054-12-15",
+        "taxaCompra": 0.0651,
+        "taxaVenda": 0.0663,
+        "puCompra": 1622.63,
+        "puVenda": 1591.4,
         "investimentoMinimo": null
       },
       {
@@ -10657,17 +10679,6 @@
         "taxaVenda": 0.065,
         "puCompra": 483.98,
         "puVenda": 464.13,
-        "investimentoMinimo": null
-      },
-      {
-        "nome": "Tesouro Renda+ Aposentadoria Extra 2084",
-        "isin": null,
-        "indexador": "IPCA",
-        "vencimento": "2084-12-15",
-        "taxaCompra": 0.0638,
-        "taxaVenda": 0.065,
-        "puCompra": 261.72,
-        "puVenda": 248.18,
         "investimentoMinimo": null
       },
       {
@@ -10693,17 +10704,6 @@
         "investimentoMinimo": null
       },
       {
-        "nome": "Tesouro Renda+ Aposentadoria Extra 2069",
-        "isin": null,
-        "indexador": "IPCA",
-        "vencimento": "2069-12-15",
-        "taxaCompra": 0.064,
-        "taxaVenda": 0.0652,
-        "puCompra": 654.33,
-        "puVenda": 631.01,
-        "investimentoMinimo": null
-      },
-      {
         "nome": "Tesouro Renda+ Aposentadoria Extra 2079",
         "isin": null,
         "indexador": "IPCA",
@@ -10715,113 +10715,25 @@
         "investimentoMinimo": null
       },
       {
-        "nome": "Tesouro Renda+ Aposentadoria Extra 2054",
+        "nome": "Tesouro Renda+ Aposentadoria Extra 2069",
         "isin": null,
         "indexador": "IPCA",
-        "vencimento": "2054-12-15",
-        "taxaCompra": 0.0651,
-        "taxaVenda": 0.0663,
-        "puCompra": 1622.63,
-        "puVenda": 1591.4,
+        "vencimento": "2069-12-15",
+        "taxaCompra": 0.064,
+        "taxaVenda": 0.0652,
+        "puCompra": 654.33,
+        "puVenda": 631.01,
         "investimentoMinimo": null
       },
       {
-        "nome": "Tesouro Renda+ Aposentadoria Extra 2064",
+        "nome": "Tesouro Renda+ Aposentadoria Extra 2084",
         "isin": null,
         "indexador": "IPCA",
-        "vencimento": "2064-12-15",
-        "taxaCompra": 0.0643,
-        "taxaVenda": 0.0655,
-        "puCompra": 884.1,
-        "puVenda": 857.4,
-        "investimentoMinimo": null
-      },
-      {
-        "nome": "Tesouro Educa+ 2047",
-        "isin": null,
-        "indexador": "IPCA",
-        "vencimento": "2047-12-15",
-        "taxaCompra": 0.0649,
-        "taxaVenda": 0.0661,
-        "puCompra": 1485.01,
-        "puVenda": 1452.48,
-        "investimentoMinimo": null
-      },
-      {
-        "nome": "Tesouro Educa+ 2041",
-        "isin": null,
-        "indexador": "IPCA",
-        "vencimento": "2041-12-15",
-        "taxaCompra": 0.06570000000000001,
-        "taxaVenda": 0.0669,
-        "puCompra": 2140.91,
-        "puVenda": 2108.16,
-        "investimentoMinimo": null
-      },
-      {
-        "nome": "Tesouro Educa+ 2030",
-        "isin": null,
-        "indexador": "IPCA",
-        "vencimento": "2030-12-15",
-        "taxaCompra": 0.06559999999999999,
-        "taxaVenda": 0.0668,
-        "puCompra": 3560.38,
-        "puVenda": 3547.7,
-        "investimentoMinimo": null
-      },
-      {
-        "nome": "Tesouro Educa+ 2036",
-        "isin": null,
-        "indexador": "IPCA",
-        "vencimento": "2036-12-15",
-        "taxaCompra": 0.0665,
-        "taxaVenda": 0.0677,
-        "puCompra": 2920.18,
-        "puVenda": 2891.64,
-        "investimentoMinimo": null
-      },
-      {
-        "nome": "Tesouro Educa+ 2037",
-        "isin": null,
-        "indexador": "IPCA",
-        "vencimento": "2037-12-15",
-        "taxaCompra": 0.0666,
-        "taxaVenda": 0.0678,
-        "puCompra": 2737.0,
-        "puVenda": 2707.22,
-        "investimentoMinimo": null
-      },
-      {
-        "nome": "Tesouro Educa+ 2031",
-        "isin": null,
-        "indexador": "IPCA",
-        "vencimento": "2031-12-15",
-        "taxaCompra": 0.0659,
-        "taxaVenda": 0.0671,
-        "puCompra": 4028.57,
-        "puVenda": 4011.57,
-        "investimentoMinimo": null
-      },
-      {
-        "nome": "Tesouro Educa+ 2044",
-        "isin": null,
-        "indexador": "IPCA",
-        "vencimento": "2044-12-15",
-        "taxaCompra": 0.065,
-        "taxaVenda": 0.06620000000000001,
-        "puCompra": 1788.43,
-        "puVenda": 1755.14,
-        "investimentoMinimo": null
-      },
-      {
-        "nome": "Tesouro Educa+ 2034",
-        "isin": null,
-        "indexador": "IPCA",
-        "vencimento": "2034-12-15",
-        "taxaCompra": 0.0665,
-        "taxaVenda": 0.0677,
-        "puCompra": 3319.46,
-        "puVenda": 3294.38,
+        "vencimento": "2084-12-15",
+        "taxaCompra": 0.0638,
+        "taxaVenda": 0.065,
+        "puCompra": 261.72,
+        "puVenda": 248.18,
         "investimentoMinimo": null
       },
       {
@@ -10833,72 +10745,6 @@
         "taxaVenda": 0.0661,
         "puCompra": 1395.2,
         "puVenda": 1363.11,
-        "investimentoMinimo": null
-      },
-      {
-        "nome": "Tesouro Educa+ 2043",
-        "isin": null,
-        "indexador": "IPCA",
-        "vencimento": "2043-12-15",
-        "taxaCompra": 0.0652,
-        "taxaVenda": 0.0664,
-        "puCompra": 1898.95,
-        "puVenda": 1865.7,
-        "investimentoMinimo": null
-      },
-      {
-        "nome": "Tesouro Educa+ 2038",
-        "isin": null,
-        "indexador": "IPCA",
-        "vencimento": "2038-12-15",
-        "taxaCompra": 0.0665,
-        "taxaVenda": 0.0677,
-        "puCompra": 2569.81,
-        "puVenda": 2539.02,
-        "investimentoMinimo": null
-      },
-      {
-        "nome": "Tesouro Educa+ 2042",
-        "isin": null,
-        "indexador": "IPCA",
-        "vencimento": "2042-12-15",
-        "taxaCompra": 0.0654,
-        "taxaVenda": 0.0666,
-        "puCompra": 2017.19,
-        "puVenda": 1984.09,
-        "investimentoMinimo": null
-      },
-      {
-        "nome": "Tesouro Educa+ 2039",
-        "isin": null,
-        "indexador": "IPCA",
-        "vencimento": "2039-12-15",
-        "taxaCompra": 0.0663,
-        "taxaVenda": 0.0675,
-        "puCompra": 2415.62,
-        "puVenda": 2384.02,
-        "investimentoMinimo": null
-      },
-      {
-        "nome": "Tesouro Educa+ 2035",
-        "isin": null,
-        "indexador": "IPCA",
-        "vencimento": "2035-12-15",
-        "taxaCompra": 0.0665,
-        "taxaVenda": 0.0677,
-        "puCompra": 3113.32,
-        "puVenda": 3086.35,
-        "investimentoMinimo": null
-      },
-      {
-        "nome": "Tesouro Educa+ 2032",
-        "isin": null,
-        "indexador": "IPCA",
-        "vencimento": "2032-12-15",
-        "taxaCompra": 0.0664,
-        "taxaVenda": 0.0676,
-        "puCompra": 3774.59,
-        "puVenda": 3754.47,
         "investimentoMinimo": null
       },
       {
@@ -10924,14 +10770,14 @@
         "investimentoMinimo": null
       },
       {
-        "nome": "Tesouro Educa+ 2046",
+        "nome": "Tesouro Educa+ 2041",
         "isin": null,
         "indexador": "IPCA",
-        "vencimento": "2046-12-15",
-        "taxaCompra": 0.0649,
-        "taxaVenda": 0.0661,
-        "puCompra": 1580.6,
-        "puVenda": 1547.72,
+        "vencimento": "2041-12-15",
+        "taxaCompra": 0.06570000000000001,
+        "taxaVenda": 0.0669,
+        "puCompra": 2140.91,
+        "puVenda": 2108.16,
         "investimentoMinimo": null
       },
       {
@@ -10943,6 +10789,160 @@
         "taxaVenda": 0.0672,
         "puCompra": 2273.52,
         "puVenda": 2241.26,
+        "investimentoMinimo": null
+      },
+      {
+        "nome": "Tesouro Educa+ 2046",
+        "isin": null,
+        "indexador": "IPCA",
+        "vencimento": "2046-12-15",
+        "taxaCompra": 0.0649,
+        "taxaVenda": 0.0661,
+        "puCompra": 1580.6,
+        "puVenda": 1547.72,
+        "investimentoMinimo": null
+      },
+      {
+        "nome": "Tesouro Educa+ 2047",
+        "isin": null,
+        "indexador": "IPCA",
+        "vencimento": "2047-12-15",
+        "taxaCompra": 0.0649,
+        "taxaVenda": 0.0661,
+        "puCompra": 1485.01,
+        "puVenda": 1452.48,
+        "investimentoMinimo": null
+      },
+      {
+        "nome": "Tesouro Educa+ 2043",
+        "isin": null,
+        "indexador": "IPCA",
+        "vencimento": "2043-12-15",
+        "taxaCompra": 0.0652,
+        "taxaVenda": 0.0664,
+        "puCompra": 1898.95,
+        "puVenda": 1865.7,
+        "investimentoMinimo": null
+      },
+      {
+        "nome": "Tesouro Educa+ 2034",
+        "isin": null,
+        "indexador": "IPCA",
+        "vencimento": "2034-12-15",
+        "taxaCompra": 0.0665,
+        "taxaVenda": 0.0677,
+        "puCompra": 3319.46,
+        "puVenda": 3294.38,
+        "investimentoMinimo": null
+      },
+      {
+        "nome": "Tesouro Educa+ 2039",
+        "isin": null,
+        "indexador": "IPCA",
+        "vencimento": "2039-12-15",
+        "taxaCompra": 0.0663,
+        "taxaVenda": 0.0675,
+        "puCompra": 2415.62,
+        "puVenda": 2384.02,
+        "investimentoMinimo": null
+      },
+      {
+        "nome": "Tesouro Educa+ 2038",
+        "isin": null,
+        "indexador": "IPCA",
+        "vencimento": "2038-12-15",
+        "taxaCompra": 0.0665,
+        "taxaVenda": 0.0677,
+        "puCompra": 2569.81,
+        "puVenda": 2539.02,
+        "investimentoMinimo": null
+      },
+      {
+        "nome": "Tesouro Educa+ 2032",
+        "isin": null,
+        "indexador": "IPCA",
+        "vencimento": "2032-12-15",
+        "taxaCompra": 0.0664,
+        "taxaVenda": 0.0676,
+        "puCompra": 3774.59,
+        "puVenda": 3754.47,
+        "investimentoMinimo": null
+      },
+      {
+        "nome": "Tesouro Educa+ 2035",
+        "isin": null,
+        "indexador": "IPCA",
+        "vencimento": "2035-12-15",
+        "taxaCompra": 0.0665,
+        "taxaVenda": 0.0677,
+        "puCompra": 3113.32,
+        "puVenda": 3086.35,
+        "investimentoMinimo": null
+      },
+      {
+        "nome": "Tesouro Educa+ 2030",
+        "isin": null,
+        "indexador": "IPCA",
+        "vencimento": "2030-12-15",
+        "taxaCompra": 0.06559999999999999,
+        "taxaVenda": 0.0668,
+        "puCompra": 3560.38,
+        "puVenda": 3547.7,
+        "investimentoMinimo": null
+      },
+      {
+        "nome": "Tesouro Educa+ 2036",
+        "isin": null,
+        "indexador": "IPCA",
+        "vencimento": "2036-12-15",
+        "taxaCompra": 0.0665,
+        "taxaVenda": 0.0677,
+        "puCompra": 2920.18,
+        "puVenda": 2891.64,
+        "investimentoMinimo": null
+      },
+      {
+        "nome": "Tesouro Educa+ 2044",
+        "isin": null,
+        "indexador": "IPCA",
+        "vencimento": "2044-12-15",
+        "taxaCompra": 0.065,
+        "taxaVenda": 0.06620000000000001,
+        "puCompra": 1788.43,
+        "puVenda": 1755.14,
+        "investimentoMinimo": null
+      },
+      {
+        "nome": "Tesouro Educa+ 2037",
+        "isin": null,
+        "indexador": "IPCA",
+        "vencimento": "2037-12-15",
+        "taxaCompra": 0.0666,
+        "taxaVenda": 0.0678,
+        "puCompra": 2737.0,
+        "puVenda": 2707.22,
+        "investimentoMinimo": null
+      },
+      {
+        "nome": "Tesouro Educa+ 2042",
+        "isin": null,
+        "indexador": "IPCA",
+        "vencimento": "2042-12-15",
+        "taxaCompra": 0.0654,
+        "taxaVenda": 0.0666,
+        "puCompra": 2017.19,
+        "puVenda": 1984.09,
+        "investimentoMinimo": null
+      },
+      {
+        "nome": "Tesouro Educa+ 2031",
+        "isin": null,
+        "indexador": "IPCA",
+        "vencimento": "2031-12-15",
+        "taxaCompra": 0.0659,
+        "taxaVenda": 0.0671,
+        "puCompra": 4028.57,
+        "puVenda": 4011.57,
         "investimentoMinimo": null
       }
     ]
